@@ -54,7 +54,7 @@ from rishtedaar.views import health_check
 
 urlpatterns = [
     ...
-    path('rishtedaar/', include('rishtedaar.urls')),
+    path('', include('rishtedaar.urls')),
     ...
 ]
 ```
