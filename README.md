@@ -67,7 +67,7 @@ Here’s what a typical health check response might look like:
 
 ```json
 {
-  "overall_health": true,
+  "healthy": true,
   "details": {
     "db": true,
     "cache": true,
