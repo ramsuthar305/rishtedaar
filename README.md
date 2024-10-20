@@ -54,7 +54,7 @@ from rishtedaar.views import health_check
 
 urlpatterns = [
     ...
-    path('rishtedaar/', include('rishtedaar.urls')),
+    path('', include('rishtedaar.urls')),
     ...
 ]
 ```
@@ -67,7 +67,7 @@ Here’s what a typical health check response might look like:
 
 ```json
 {
-  "overall_health": true,
+  "healthy": true,
   "details": {
     "db": true,
     "cache": true,
