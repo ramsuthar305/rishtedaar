@@ -11,16 +11,16 @@ def run_health_checks():
 
     # Create a ThreadPoolExecutor to run checks in parallel
     with ThreadPoolExecutor() as executor:
-        if getattr(settings, 'RISHTEDAAR_DB_CHECK', True):
+        if getattr(settings, 'RISHTEDAAR_DB_CHECK', False):
             futures.append(('db', executor.submit(check_db)))
         
-        if getattr(settings, 'RISHTEDAAR_CACHE_CHECK', True):
+        if getattr(settings, 'RISHTEDAAR_CACHE_CHECK', False):
             futures.append(('cache', executor.submit(check_cache)))
         
-        if getattr(settings, 'RISHTEDAAR_CELERY_CHECK', True):
+        if getattr(settings, 'RISHTEDAAR_CELERY_CHECK', False):
             futures.append(('celery', executor.submit(check_celery)))
         
-        if getattr(settings, 'RISHTEDAAR_RMQ_CHECK', True):
+        if getattr(settings, 'RISHTEDAAR_RMQ_CHECK', False):
             futures.append(('rabbitmq', executor.submit(check_rmq)))
 
         for key, future in futures:

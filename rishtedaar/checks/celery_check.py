@@ -1,8 +1,8 @@
-from celery import Celery
 from django.conf import settings
-from kombu import Connection
 
 def check_celery():
+    from celery import Celery
+    from kombu import Connection
     try:
         project_name = settings.SETTINGS_MODULE.split('.')[0]
         # Initialize Celery with the broker URL
