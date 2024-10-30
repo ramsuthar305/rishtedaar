@@ -7,13 +7,8 @@ def check_cache(cache_alias='default', test_key='health_check_key', test_value='
     try:
         warnings.simplefilter("ignore", CacheKeyWarning)
         cache = caches[cache_alias]
-        cache.set(test_key, test_value, timeout=5)
-        value = cache.get(test_key)
-        
-        if value == test_value:
-            return True, "Cache is healthy"
-        else:
-            return False, "Cache is unhealthy: Unexpected value retrieved"
-    
+        # Try to perform a simple get operation; no need to set a new key
+        cache.get('_health_check')  # A non-intrusive check
+        return True, "Cache is healthy"
     except Exception as e:
         return False, f"Cache error: {str(e)}"
