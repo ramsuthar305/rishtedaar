@@ -4,6 +4,7 @@ from .db_check import check_db
 from .cache_check import check_cache
 from .celery_check import check_celery
 from .rmq_check import check_rmq
+import logging
 
 def run_health_checks():
     checks = {}
@@ -27,6 +28,7 @@ def run_health_checks():
             try:
                 checks[key] = future.result()
             except Exception as e:
+                logging.error(f"Health check failed for {key}: {str(e)}")
                 checks[key] = (False, str(e))
 
     overall_health = all(status for status, _ in checks.values())

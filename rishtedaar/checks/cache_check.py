@@ -1,5 +1,5 @@
 import warnings
-
+import logging
 
 def check_cache(cache_alias='default', test_key='health_check_key', test_value='health_check_value'):
     from django.core.cache import caches
@@ -7,8 +7,9 @@ def check_cache(cache_alias='default', test_key='health_check_key', test_value='
     try:
         warnings.simplefilter("ignore", CacheKeyWarning)
         cache = caches[cache_alias]
-        # Try to perform a simple get operation; no need to set a new key
-        cache.get('_health_check')  # A non-intrusive check
+        cache.get('_health_check')
+        logging.info("Cache is healthy")
         return True, "Cache is healthy"
     except Exception as e:
+        logging.error(f"Cache health check failed: {str(e)}")
         return False, f"Cache error: {str(e)}"
